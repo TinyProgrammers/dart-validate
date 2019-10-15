@@ -19,6 +19,7 @@
 
 library validate;
 
+import 'package:quiver/strings.dart';
 import 'package:validate/expect.dart' as expect;
 
 part "src/errors.dart";
@@ -56,6 +57,8 @@ abstract class Validate {
   static const String PATTERN_PW =
       "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%?])[0-9a-zA-Z@#\$%?]{8,15}\$";
   static const String PATTERN_ALPHANUMERIC = "^[a-zA-Z0-9öäüÖÄÜß]+\$";
+  static const String PATTERN_AR_EN_TEXT = "^[a-z\u0621-\u064A]+\$";
+  static const String PATTERN_AR_EN_TEXT_WITH_SPACE = "^[a-z\u0621-\u064A ]+\$";
   static const String PATTERN_NUMERIC = "^(0|[0-9]+)\$";
   static const String PATTERN_HEX = "^(0x[a-fA-F0-9]+)|([a-fA-F0-9])+\$";
   static const String PATTERN_UUID =
@@ -313,6 +316,18 @@ abstract class Validate {
   static bool isEmail(String input,
       [String message = DEFAULT_MATCHES_PATTERN_EX]) {
     return matchesPattern(input, new RegExp(PATTERN_EMAIL), message);
+  }
+
+  static bool isArEnText(String input,
+      [String message = DEFAULT_MATCHES_PATTERN_EX]) {
+    return matchesPattern(input, new RegExp(PATTERN_AR_EN_TEXT), message);
+  }
+
+  static bool isArEnTextWithSpace(String input,
+      [String message = DEFAULT_MATCHES_PATTERN_EX]) {
+    if (isBlank(input)) return false;
+    return matchesPattern(
+        input, new RegExp(PATTERN_AR_EN_TEXT_WITH_SPACE), message);
   }
 
   static bool isPassword(String input,

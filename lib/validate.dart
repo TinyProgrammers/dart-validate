@@ -309,29 +309,29 @@ abstract class Validate {
     return true;
   }
 
-  static void isEmail(String input,
+  static bool isEmail(String input,
       [String message = DEFAULT_MATCHES_PATTERN_EX]) {
-    matchesPattern(input, new RegExp(PATTERN_EMAIL), message);
+    return matchesPattern(input, new RegExp(PATTERN_EMAIL), message);
   }
 
-  static void isPassword(String input,
+  static bool isPassword(String input,
       [String message = DEFAULT_MATCHES_PATTERN_EX]) {
-    matchesPattern(input, new RegExp(PATTERN_PW), message);
+    return matchesPattern(input, new RegExp(PATTERN_PW), message);
   }
 
-  static void isAlphaNumeric(String input,
+  static bool isAlphaNumeric(String input,
       [String message = DEFAULT_MATCHES_PATTERN_EX]) {
-    matchesPattern(input, new RegExp(PATTERN_ALPHANUMERIC), message);
+    return matchesPattern(input, new RegExp(PATTERN_ALPHANUMERIC), message);
   }
 
-  static void isHex(String input,
+  static bool isHex(String input,
       [String message = DEFAULT_MATCHES_PATTERN_EX]) {
-    matchesPattern(input, new RegExp(PATTERN_HEX), message);
+    return matchesPattern(input, new RegExp(PATTERN_HEX), message);
   }
 
-  static void isUUID(String input,
+  static bool isUUID(String input,
       [String message = DEFAULT_MATCHES_PATTERN_EX]) {
-    matchesPattern(input, new RegExp(PATTERN_UUID), message);
+    return matchesPattern(input, new RegExp(PATTERN_UUID), message);
   }
 
   // inclusiveBetween

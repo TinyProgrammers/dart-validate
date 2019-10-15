@@ -20,6 +20,7 @@
 library validate;
 
 import 'dart:convert';
+
 import 'package:validate/expect.dart' as expect;
 
 part "src/errors.dart";
@@ -46,48 +47,62 @@ part "src/utils.dart";
  *
  */
 
-
-
 /**
  * Pattern-RegExp:
  *      http://goo.gl/jxPnU3
  *      http://www.mkyong.com/regular-expressions/how-to-validate-password-with-regular-expression/
  */
 abstract class Validate {
-    static const String PATTERN_EMAIL         = "^([0-9a-zA-Z]([-.+\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})\$";
-    static const String PATTERN_PW            = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%?])[0-9a-zA-Z@#\$%?]{8,15}\$";
-    static const String PATTERN_ALPHANUMERIC  = "^[a-zA-Z0-9öäüÖÄÜß]+\$";
-    static const String PATTERN_HEX           = "^(0x[a-fA-F0-9]+)|([a-fA-F0-9])+\$";
-    static const String PATTERN_UUID         = "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}\$";
+  static const String PATTERN_EMAIL =
+      "^([0-9a-zA-Z]([-.+\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})\$";
+  static const String PATTERN_PW =
+      "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%?])[0-9a-zA-Z@#\$%?]{8,15}\$";
+  static const String PATTERN_ALPHANUMERIC = "^[a-zA-Z0-9öäüÖÄÜß]+\$";
+  static const String PATTERN_HEX = "^(0x[a-fA-F0-9]+)|([a-fA-F0-9])+\$";
+  static const String PATTERN_UUID =
+      "^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}\$";
 
-    static const String DEFAULT_IS_TRUE_EX_MESSAGE = "The validated expression is false";
-    static const String DEFAULT_IS_NULL_EX_MESSAGE = "The validated object is null";
-    static const String DEFAULT_NOT_EMPTY_MESSAGE = "The validated value is empty";
-    static const String DEFAULT_NOT_BLANK_EX_MESSAGE = "The validated string is blank";
-    static const String DEFAULT_NO_NULL_ELEMENTS_ARRAY_EX_MESSAGE = "The validated array contains null element";
-    static const String DEFAULT_VALID_INDEX_ARRAY_EX_MESSAGE = "The validated array index is invalid";
-    static const String DEFAULT_VALID_STATE_EX_MESSAGE = "The validated state is false";
-    static const String DEFAULT_MATCHES_PATTERN_EX = "The string does not match the pattern";
-    static const String DEFAULT_INCLUSIVE_BETWEEN_EX_MESSAGE = "The value is not in the specified inclusive range";
-    static const String DEFAULT_EXCLUSIVE_BETWEEN_EX_MESSAGE = "The value is not in the specified exclusive range";
-    static const String DEFAULT_JSON_MESSAGE = "The value is neither a num, String, bool, Null, List or Map";
-    static const String DEFAULT_KEY_IN_MAP_MESSAGE = "The key '%key%' is not available for this structure: %structure%";
+  static const String DEFAULT_IS_TRUE_EX_MESSAGE =
+      "The validated expression is false";
+  static const String DEFAULT_IS_NULL_EX_MESSAGE =
+      "The validated object is null";
+  static const String DEFAULT_NOT_EMPTY_MESSAGE =
+      "The validated value is empty";
+  static const String DEFAULT_NOT_BLANK_EX_MESSAGE =
+      "The validated string is blank";
+  static const String DEFAULT_NO_NULL_ELEMENTS_ARRAY_EX_MESSAGE =
+      "The validated array contains null element";
+  static const String DEFAULT_VALID_INDEX_ARRAY_EX_MESSAGE =
+      "The validated array index is invalid";
+  static const String DEFAULT_VALID_STATE_EX_MESSAGE =
+      "The validated state is false";
+  static const String DEFAULT_MATCHES_PATTERN_EX =
+      "The string does not match the pattern";
+  static const String DEFAULT_INCLUSIVE_BETWEEN_EX_MESSAGE =
+      "The value is not in the specified inclusive range";
+  static const String DEFAULT_EXCLUSIVE_BETWEEN_EX_MESSAGE =
+      "The value is not in the specified exclusive range";
+  static const String DEFAULT_JSON_MESSAGE =
+      "The value is neither a num, String, bool, Null, List or Map";
+  static const String DEFAULT_KEY_IN_MAP_MESSAGE =
+      "The key '%key%' is not available for this structure: %structure%";
 
-    static const String DEFAULT_IS_INSTANCE_OF_EX_MESSAGE = "The instance of the validated object is invalid. Should have been %wish% but was %truth%";
+  static const String DEFAULT_IS_INSTANCE_OF_EX_MESSAGE =
+      "The instance of the validated object is invalid. Should have been %wish% but was %truth%";
 
-    /// prettyPrint for JSON (Used for KeyInMap check)
-    static const JsonEncoder _PRETTYJSON = const JsonEncoder.withIndent('  ');
+  /// prettyPrint for JSON (Used for KeyInMap check)
+  static const JsonEncoder _PRETTYJSON = const JsonEncoder.withIndent('  ');
 
-    /*
+  /*
     static const String _DEFAULT_NO_NULL_ELEMENTS_COLLECTION_EX_MESSAGE = "The validated collection contains null element at specified index";
     static const String _DEFAULT_VALID_INDEX_CHAR_SEQUENCE_EX_MESSAGE = "The validated character sequence index is invalid";
     static const String _DEFAULT_VALID_INDEX_COLLECTION_EX_MESSAGE ="The validated collection index is invalid";
     */
 
-    // isTrue
-    //---------------------------------------------------------------------------------
+  // isTrue
+  //---------------------------------------------------------------------------------
 
-    /**
+  /**
      * <p>Validate that the argument condition is [true] otherwise
      * throwing an exception with the specified message. This method is useful when
      * validating according to an arbitrary boolean expression, such as validating a
@@ -99,13 +114,14 @@ abstract class Validate {
      * [message]  the exception message if invalid, not null
      * Throws [ArgumentError] if expression is [false]
      */
-    static bool isTrue(final bool expression, [ final String message = DEFAULT_IS_TRUE_EX_MESSAGE])
-            => expect.isTrue(expression, message: () => message);
+  static bool isTrue(final bool expression,
+          [final String message = DEFAULT_IS_TRUE_EX_MESSAGE]) =>
+      expect.isTrue(expression, message: () => message);
 
-    // notNull
-    //---------------------------------------------------------------------------------
+  // notNull
+  //---------------------------------------------------------------------------------
 
-    /**
+  /**
      * <p>Validate that the specified argument is not [null];
      * otherwise throwing an exception.
      *
@@ -125,14 +141,14 @@ abstract class Validate {
 //        return object;
 //    }
 
-    static T notNull<T>(final T object,[String message = DEFAULT_IS_NULL_EX_MESSAGE])
-        => expect.notNull(object, message: () => message);
+  static T notNull<T>(final T object,
+          [String message = DEFAULT_IS_NULL_EX_MESSAGE]) =>
+      expect.notNull(object, message: () => message);
 
+  // notEmpty array
+  //---------------------------------------------------------------------------------
 
-    // notEmpty array
-    //---------------------------------------------------------------------------------
-
-    /**
+  /**
      * <p>Validate that the specified argument is neither [null]
      * nor is empty (object must have isEmpty implemented); otherwise throwing an exception
      * with the specified message.
@@ -145,25 +161,25 @@ abstract class Validate {
      * Throws [ArgumentError] if the array is [null]
      * Throws [ArgumentError] if the array is empty
      */
-    static notEmpty(final value, [String message = DEFAULT_NOT_EMPTY_MESSAGE]) {
-        Validate.notNull(value,message);
-        /*
+  static bool notEmpty(final value,
+      [String message = DEFAULT_NOT_EMPTY_MESSAGE]) {
+    Validate.notNull(value, message);
+    /*
         if ((value is List || value is Map || value is String) && value.length == 0) {
             throw new ArgumentError(message);
         }
         */
-        if (value.isEmpty) {
-            throw new ArgumentError(message);
-        }
-
-        return value;
+    if (value.isEmpty) {
+      return false;
     }
 
+    return true;
+  }
 
-    // notBlank string
-    //---------------------------------------------------------------------------------
+  // notBlank string
+  //---------------------------------------------------------------------------------
 
-    /**
+  /**
      * <p>Validate that the specified string is
      * neither [null], a length of zero (no characters), empty
      * nor whitespace; otherwise throwing an exception with the specified
@@ -177,18 +193,19 @@ abstract class Validate {
      * Throws [ArgumentError] if the character sequence is [null]
      * Throws [ArgumentError] if the character sequence is blank
      */
-    static String notBlank(final String value, [String message = DEFAULT_NOT_BLANK_EX_MESSAGE]) {
-        Validate.notNull(value,message);
-        if ((value is String) == false || value.trim().isEmpty) {
-            throw new ArgumentError(message);
-        }
-        return value;
+  static bool notBlank(final String value,
+      [String message = DEFAULT_NOT_BLANK_EX_MESSAGE]) {
+    Validate.notNull(value, message);
+    if ((value is String) == false || value.trim().isEmpty) {
+      return false;
     }
+    return true;
+  }
 
-    // noNullElements array
-    //---------------------------------------------------------------------------------
+  // noNullElements array
+  //---------------------------------------------------------------------------------
 
-    /**
+  /**
      * <p>Validate that the specified argument array is neither
      * [null] nor contains any elements that are [null];
      * otherwise throwing an exception with the specified message.
@@ -204,24 +221,22 @@ abstract class Validate {
      * Throws [ArgumentError] if the iterable is [null]
      * Throws [ArgumentError] if an element is [null]
      */
-    static Iterable noNullElements(Iterable iterable, [String message = DEFAULT_NO_NULL_ELEMENTS_ARRAY_EX_MESSAGE]) {
-        Validate.notNull(iterable);
-        for(var x in iterable) {
-            if(x == null) {
-                throw new ArgumentError(message);
-            }
-        }
-
-        return iterable;
+  static bool noNullElements(Iterable iterable,
+      [String message = DEFAULT_NO_NULL_ELEMENTS_ARRAY_EX_MESSAGE]) {
+    Validate.notNull(iterable);
+    for (var x in iterable) {
+      if (x == null) {
+        return false;
+      }
     }
 
+    return true;
+  }
 
+  // validIndex array
+  //---------------------------------------------------------------------------------
 
-
-    // validIndex array
-    //---------------------------------------------------------------------------------
-
-    /**
+  /**
      * <p>Validates that the index is within the bounds of the argument
      * iterable; otherwise throwing an exception with the specified message.</p>
      *
@@ -237,20 +252,19 @@ abstract class Validate {
      * Throws [ArgumentError] if the array is [null]
      * Throws [RangeError] if the index is invalid
      */
-    static Iterable validIndex(Iterable iterable, int index, [String message = DEFAULT_VALID_INDEX_ARRAY_EX_MESSAGE]) {
-        Validate.notNull(iterable);
-        if (index < 0 || index >= iterable.length) {
-            throw new RangeError(message);
-        }
-        return iterable;
+  static bool validIndex(Iterable iterable, int index,
+      [String message = DEFAULT_VALID_INDEX_ARRAY_EX_MESSAGE]) {
+    Validate.notNull(iterable);
+    if (index < 0 || index >= iterable.length) {
+      return false;
     }
+    return true;
+  }
 
+  // validState
+  //---------------------------------------------------------------------------------
 
-
-    // validState
-    //---------------------------------------------------------------------------------
-
-    /**
+  /**
      * <p>Validate that the stateful condition is [true] otherwise
      * throwing an exception. This method is useful when validating according
      * to an arbitrary boolean expression, such as validating a
@@ -266,18 +280,18 @@ abstract class Validate {
      * [expression] the boolean expression to check
      * Throws [IllegalStateException] if expression is [false]
      */
-    static void validState(bool expression,[String message = DEFAULT_VALID_STATE_EX_MESSAGE]) {
-        if (expression == false) {
-            throw new IllegalStateError(message);
-        }
+  static bool validState(bool expression,
+      [String message = DEFAULT_VALID_STATE_EX_MESSAGE]) {
+    if (expression == false) {
+      return false;
     }
+    return true;
+  }
 
+  // matchesPattern
+  //---------------------------------------------------------------------------------
 
-
-    // matchesPattern
-    //---------------------------------------------------------------------------------
-
-    /**
+  /**
      * <p>Validate that the specified argument character sequence matches the specified regular
      * expression pattern; otherwise throwing an exception.</p>
      *
@@ -289,36 +303,43 @@ abstract class Validate {
      * [pattern] the regular expression pattern, not null
      * Throws [ArgumentError] if the character sequence does not match the pattern
      */
-    static void matchesPattern(String input, RegExp pattern,[String message = DEFAULT_MATCHES_PATTERN_EX]) {
-        if (pattern.hasMatch(input) == false) {
-            throw new ArgumentError(message);
-        }
+  static bool matchesPattern(String input, RegExp pattern,
+      [String message = DEFAULT_MATCHES_PATTERN_EX]) {
+    if (pattern.hasMatch(input) == false) {
+      return false;
     }
+    return true;
+  }
 
-    static void isEmail(String input,[String message = DEFAULT_MATCHES_PATTERN_EX]) {
-        matchesPattern(input,new RegExp(PATTERN_EMAIL),message);
-    }
+  static void isEmail(String input,
+      [String message = DEFAULT_MATCHES_PATTERN_EX]) {
+    matchesPattern(input, new RegExp(PATTERN_EMAIL), message);
+  }
 
-    static void isPassword(String input,[String message = DEFAULT_MATCHES_PATTERN_EX]) {
-        matchesPattern(input,new RegExp(PATTERN_PW),message);
-    }
+  static void isPassword(String input,
+      [String message = DEFAULT_MATCHES_PATTERN_EX]) {
+    matchesPattern(input, new RegExp(PATTERN_PW), message);
+  }
 
-    static void isAlphaNumeric(String input,[String message = DEFAULT_MATCHES_PATTERN_EX]) {
-        matchesPattern(input,new RegExp(PATTERN_ALPHANUMERIC),message);
-    }
+  static void isAlphaNumeric(String input,
+      [String message = DEFAULT_MATCHES_PATTERN_EX]) {
+    matchesPattern(input, new RegExp(PATTERN_ALPHANUMERIC), message);
+  }
 
-    static void isHex(String input,[String message = DEFAULT_MATCHES_PATTERN_EX]) {
-        matchesPattern(input,new RegExp(PATTERN_HEX),message);
-    }
+  static void isHex(String input,
+      [String message = DEFAULT_MATCHES_PATTERN_EX]) {
+    matchesPattern(input, new RegExp(PATTERN_HEX), message);
+  }
 
-    static void isUUID(String input,[String message = DEFAULT_MATCHES_PATTERN_EX]) {
-        matchesPattern(input,new RegExp(PATTERN_UUID),message);
-    }
+  static void isUUID(String input,
+      [String message = DEFAULT_MATCHES_PATTERN_EX]) {
+    matchesPattern(input, new RegExp(PATTERN_UUID), message);
+  }
 
-    // inclusiveBetween
-    //---------------------------------------------------------------------------------
+  // inclusiveBetween
+  //---------------------------------------------------------------------------------
 
-    /**
+  /**
      * <p>Validate that the specified argument object fall between the two
      * inclusive values specified; otherwise, throws an exception.</p>
      *
@@ -329,16 +350,19 @@ abstract class Validate {
      * [value] the object to validate, not null
      * Throws [ArgumentError] if the value falls out of the boundaries
      */
-    static void inclusiveBetween(Comparable start, Comparable end, Comparable value,[String message = DEFAULT_INCLUSIVE_BETWEEN_EX_MESSAGE]) {
-        if (value.compareTo(start) < 0 || value.compareTo(end) > 0) {
-            throw new ArgumentError(message);
-        }
+  static bool inclusiveBetween(
+      Comparable start, Comparable end, Comparable value,
+      [String message = DEFAULT_INCLUSIVE_BETWEEN_EX_MESSAGE]) {
+    if (value.compareTo(start) < 0 || value.compareTo(end) > 0) {
+      return false;
     }
+    return true;
+  }
 
-    // exclusiveBetween
-    //---------------------------------------------------------------------------------
+  // exclusiveBetween
+  //---------------------------------------------------------------------------------
 
-    /**
+  /**
      * <p>Validate that the specified argument object fall between the two
      * exclusive values specified; otherwise, throws an exception.</p>
      *
@@ -349,15 +373,18 @@ abstract class Validate {
      * [value] the object to validate, not null
      * Throws [ArgumentError] if the value falls out of the boundaries
      */
-    static void exclusiveBetween(Comparable start, Comparable end, Comparable value,[String message = DEFAULT_EXCLUSIVE_BETWEEN_EX_MESSAGE]) {
-        if (value.compareTo(start) <= 0 || value.compareTo(end) >= 0) {
-            throw new ArgumentError(message);
-        }
+  static bool exclusiveBetween(
+      Comparable start, Comparable end, Comparable value,
+      [String message = DEFAULT_EXCLUSIVE_BETWEEN_EX_MESSAGE]) {
+    if (value.compareTo(start) <= 0 || value.compareTo(end) >= 0) {
+      return false;
     }
+    return true;
+  }
 
-    // json Object
-    //---------------------------------------------------------------------------------
-    /**
+  // json Object
+  //---------------------------------------------------------------------------------
+  /**
      * <p>Validate that the specified value ist either a num, String, bool, Map or List.
      * If the first check fails isJson checks if the value has a toJson() function - if so, the value is also valid
      * </p>
@@ -365,38 +392,45 @@ abstract class Validate {
      * [value] the value to validate, not null
      * Throws [ArgumentError] if the value falls out of the boundaries
      */
-    static void isJson(final dynamic value,[String message = DEFAULT_JSON_MESSAGE]) {
-        Validate.notNull(value, message);
-        if(!((value is num) || (value is String) || (value is bool) || (value is List) || (value is Map))) {
-            try {
-                value.toJson();
-            } on NoSuchMethodError {
-                throw new ArgumentError(message);
-            }
-        }
+  static bool isJson(final dynamic value,
+      [String message = DEFAULT_JSON_MESSAGE]) {
+    Validate.notNull(value, message);
+    if (!((value is num) ||
+        (value is String) ||
+        (value is bool) ||
+        (value is List) ||
+        (value is Map))) {
+      try {
+        value.toJson();
+      } on NoSuchMethodError {
+        return false;
+      }
     }
+    return true;
+  }
 
-    // Key in Map
-    //---------------------------------------------------------------------------------
-    /**
+  // Key in Map
+  //---------------------------------------------------------------------------------
+  /**
      * <p>Validate that the specified key is in the map and if so the value is not null.
      * If %key% is found in [message] it will be replaced with [key].toString() </p>
      *
      * [key] the key to validate, [map] to validate, must not be null
      * Throws [ArgumentError] if the key is not found in the map or if the value found is null.
      */
-    static void isKeyInMap(final dynamic key,final Map map,[String message = DEFAULT_KEY_IN_MAP_MESSAGE]) {
-        Validate.notNull(map, message);
-        if(!map.containsKey(key) || map[key] == null) {
-            throw new ArgumentError(message.replaceFirst("%key%", key.toString())
-                .replaceFirst("%structure%",_PRETTYJSON.convert(map)));
-        }
+  static bool isKeyInMap(final dynamic key, final Map map,
+      [String message = DEFAULT_KEY_IN_MAP_MESSAGE]) {
+    Validate.notNull(map, message);
+    if (!map.containsKey(key) || map[key] == null) {
+      return false;
     }
+    return true;
+  }
 
-    // isInstanceOf
-    //---------------------------------------------------------------------------------
+  // isInstanceOf
+  //---------------------------------------------------------------------------------
 
-    /**
+  /**
      * Validate that the argument is an instance of the specified class; otherwise
      * throwing an exception. This method is useful when validating according to an arbitrary
      * class
@@ -406,13 +440,15 @@ abstract class Validate {
      *    Validate.isInstance(new instanceCheck<String>(),myParam);
      *    Validate.isInstance(new instanceCheck<List<String>>(strict: false),new List())
      */
-    static void isInstance(final instanceCheck instanceCheck, var obj,[String message = DEFAULT_IS_INSTANCE_OF_EX_MESSAGE]) {
-        Validate.notNull(instanceCheck);
+  static bool isInstance(final instanceCheck instanceCheck, var obj,
+      [String message = DEFAULT_IS_INSTANCE_OF_EX_MESSAGE]) {
+    Validate.notNull(instanceCheck);
 
-        if (!instanceCheck.check(obj)) {
-            final String wish = instanceCheck.type;
-            final String truth = ( obj != null ? obj.runtimeType.toString() : 'null' );
-            throw new ArgumentError(message.replaceAll('%wish%',wish).replaceAll('%truth%',truth));
-        }
+    if (!instanceCheck.check(obj)) {
+      final String wish = instanceCheck.type;
+      final String truth = (obj != null ? obj.runtimeType.toString() : 'null');
+      return false;
     }
+    return true;
+  }
 }

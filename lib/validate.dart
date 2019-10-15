@@ -54,8 +54,10 @@ part "src/utils.dart";
 abstract class Validate {
   static const String PATTERN_EMAIL =
       "^([0-9a-zA-Z]([-.+\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})\$";
-  static const String PATTERN_PW =
+  static const String PATTERN_STRONG_PW =
       "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%?])[0-9a-zA-Z@#\$%?]{8,15}\$";
+  static const String PATTERN_BASIC_PW =
+      "^[a-zA-Z0-9öäüÖÄÜß\u0621-\u064A@#\$%? ]+\$";
   static const String PATTERN_ALPHANUMERIC = "^[a-zA-Z0-9öäüÖÄÜß]+\$";
   static const String PATTERN_AR_EN_TEXT = "^[a-z\u0621-\u064A]+\$";
   static const String PATTERN_AR_EN_TEXT_WITH_SPACE = "^[a-z\u0621-\u064A ]+\$";
@@ -332,7 +334,12 @@ abstract class Validate {
 
   static bool isPassword(String input,
       [String message = DEFAULT_MATCHES_PATTERN_EX]) {
-    return matchesPattern(input, new RegExp(PATTERN_PW), message);
+    return matchesPattern(input, new RegExp(PATTERN_STRONG_PW), message);
+  }
+
+  static bool isBasicPassword(String input,
+      [String message = DEFAULT_MATCHES_PATTERN_EX]) {
+    return matchesPattern(input, new RegExp(PATTERN_BASIC_PW), message);
   }
 
   static bool isAlphaNumeric(String input,

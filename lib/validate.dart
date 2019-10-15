@@ -19,8 +19,6 @@
 
 library validate;
 
-import 'dart:convert';
-
 import 'package:validate/expect.dart' as expect;
 
 part "src/errors.dart";
@@ -91,7 +89,7 @@ abstract class Validate {
       "The instance of the validated object is invalid. Should have been %wish% but was %truth%";
 
   /// prettyPrint for JSON (Used for KeyInMap check)
-  static const JsonEncoder _PRETTYJSON = const JsonEncoder.withIndent('  ');
+//  static const JsonEncoder _PRETTYJSON = const JsonEncoder.withIndent('  ');
 
   /*
     static const String _DEFAULT_NO_NULL_ELEMENTS_COLLECTION_EX_MESSAGE = "The validated collection contains null element at specified index";
@@ -445,8 +443,8 @@ abstract class Validate {
     Validate.notNull(instanceCheck);
 
     if (!instanceCheck.check(obj)) {
-      final String wish = instanceCheck.type;
-      final String truth = (obj != null ? obj.runtimeType.toString() : 'null');
+//      final String wish = instanceCheck.type;
+//      final String truth = (obj != null ? obj.runtimeType.toString() : 'null');
       return false;
     }
     return true;

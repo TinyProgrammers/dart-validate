@@ -60,7 +60,7 @@ abstract class Validate {
       "^[a-zA-Z0-9öäüÖÄÜß\u0621-\u064A@#\$%? ]+\$";
   static const String PATTERN_ALPHANUMERIC = "^[a-zA-Z0-9öäüÖÄÜß]+\$";
   static const String PATTERN_AR_EN_TEXT = "^[a-z\u0621-\u064A]+\$";
-  static const String PATTERN_AR_EN_TEXT_WITH_SPACE = "^[a-z\u0621-\u064A ]+\$";
+  static const String PATTERN_AR_EN_TEXT_WITH_SPACE = "^[a-zA-Z\u0621-\u064A ]+\$";
   static const String PATTERN_NUMERIC = "^(0|[0-9]+)\$";
   static const String PATTERN_HEX = "^(0x[a-fA-F0-9]+)|([a-fA-F0-9])+\$";
   static const String PATTERN_UUID =
